@@ -145,5 +145,12 @@ def finish_anketa(message, user_data):
         bot.send_photo(CHANNEL_ID, user_data["Статистика"], caption="📊 Игровая статистика")
 
 # ------------------ ЗАПУСК ------------------
-keep_alive()
-bot.polling(non_stop=True)
+if __name__ == '__main__':
+    from threading import Thread
+
+    # Запускаємо Flask у фоновому потоці
+    t = Thread(target=keep_alive)
+    t.start()
+
+    # Запускаємо самого бота
+    bot.polling(none_stop=True, interval=0)
