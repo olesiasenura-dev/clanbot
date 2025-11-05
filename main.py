@@ -70,6 +70,11 @@ def get_name(message):
 
 def get_age(message, user_data):
     user_data["Возраст"] = message.text
+    bot.send_message(message.chat.id, "🔗 Твоя ссылка на Telegram (например: @username):")
+    bot.register_next_step_handler(message, get_tg_link, user_data)
+
+def get_tg_link(message, user_data):
+    user_data["Telegram"] = message.text
     bot.send_message(message.chat.id, "🌍 Из какой ты страны?")
     bot.register_next_step_handler(message, get_country, user_data)
 
@@ -121,6 +126,7 @@ def finish_anketa(message, user_data):
         "📩 Новая анкета:\n\n"
         f"Имя: {user_data['Имя']}\n"
         f"Возраст: {user_data['Возраст']}\n"
+        f"Telegram: {user_data['Telegram']}\n"
         f"Страна: {user_data['Страна']}\n"
         f"Город: {user_data['Город']}\n"
         f"Звание: {user_data['Звание']}\n"
