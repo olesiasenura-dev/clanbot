@@ -1,24 +1,28 @@
 from flask import Flask
 from threading import Thread
-
-app = Flask('')
-
-@app.route('/')
-def home():
-return "I'm alive!"
-
-def run():
-app.run(host='0.0.0.0', port=8080)
 import telebot
 from telebot import types
 
-# 🔒 Твій токен — встав сюди між лапками ↓
+# 🔒 Твій токен — вставлений прямо сюди ↓
 BOT_TOKEN = "8367504992:AAFzhcwo18OSq2AfrzGIvxJBSsWICBntutw"
-
 bot = telebot.TeleBot(BOT_TOKEN)
 
+# 🔸 Flask-сервер, щоб Render не засинав
+app = Flask('') # ← тут якраз ті дужки і апострофи, про які ти згадала
+
+@app.route('/')
+def home():
+return "I'm alive!" # це сторінка, яку ти побачиш у браузері
+
+def run():
+app.run(host='0.0.0.0', port=8080) # Render слухає цей порт
+
+def keep_alive():
+t = Thread(target=run)
+t.start()
+
 # 🔸 Канал або група, куди надсилати анкети
-CHANNEL_ID = "@clanapplications"  # або -100XXXXXXXXXXX якщо приватний канал
+CHANNEL_ID = "@clanapplications" # або -100XXXXXXXXXXX якщо приватний
 
 # 🔹 Текст правил
 RULES_TEXT = """
