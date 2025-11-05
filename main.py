@@ -15,11 +15,11 @@ def home():
     return "I'm alive!" # це сторінка, яку ти побачиш у браузері
 
 def run():
-app.run(host='0.0.0.0', port=8080) # Render слухає цей порт
+    app.run(host='0.0.0.0', port=8080) # Render слухає цей порт
 
 def keep_alive():
-t = Thread(target=run)
-t.start()
+    t = Thread(target=run)
+    t.start()
 
 # 🔸 Канал або група, куди надсилати анкети
 CHANNEL_ID = "@clanapplications" # або -100XXXXXXXXXXX якщо приватний
